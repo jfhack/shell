@@ -1,7 +1,13 @@
 #!/bin/bash
 
+TERMUX=0
+if command -v termux-setup-storage &> /dev/null
+then
+  TERMUX=1
+fi
+
 elevation(){
-  if [[ $EUID > 0 ]]; then
+  if [[ $EUID > 0 && $TERMUX == 0 ]]; then
     sudo "$@"
   else
     "$@"
@@ -11,20 +17,21 @@ elevation(){
 install_packages(){
   if command -v pacman &> /dev/null
   then
+    echo "found pacman"
     elevation pacman -Syu
     elevation pacman -S "$@" --noconfirm
   fi
 
   if command -v apt &> /dev/null
   then
+    echo "found apt"
     elevation apt update
     elevation apt install "$@" -y
   fi
 }
 
 install_packages git fish
-
-chsh -s $(which fish)
+chsh -s fish || chsh -s $(which fish)
 mkdir -p ~/.config/fish/functions
 cp fish/config.fish ~/.config/fish/config.fish
 cp fish/fish_title.fish ~/.config/fish/functions/fish_title.fish

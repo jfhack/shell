@@ -2,8 +2,17 @@
 
 # BAT_VERSION=v0.18.2
 
+TERMUX=0
+if command -v termux-setup-storage &> /dev/null
+then
+  TERMUX=1
+
+  pkg install bat
+  exit
+fi
+
 elevation(){
-  if [[ $EUID > 0 ]]; then
+  if [[ $EUID > 0 && $TERMUX == 0 ]]; then
     sudo "$@"
   else
     "$@"
