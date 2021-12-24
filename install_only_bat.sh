@@ -43,28 +43,38 @@ get_latest_release() {
     sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
 }
 
+if [ -z ${BAT_VERSION+x} ]; then
+  BAT_VERSION=$(get_latest_release "sharkdp/bat")
+fi
+
+if [ "${BAT_VERSION:1}" == $(bat -V 2> /dev/null | awk '{print $2;}') ]; then
+  echo "bat is already the newest version ($BAT_VERSION)"
+  exit
+fi
+
+echo $BAT_VERSION
+
 if command -v apt &> /dev/null
 then
-  if [ -z ${BAT_VERSION+x} ]; then
-    BAT_VERSION=$(get_latest_release "sharkdp/bat")
-  fi
-  echo $BAT_VERSION
+  case $(uname -m) in
+    armv7l | arm)
+      wget https://github.com/sharkdp/bat/releases/download/$BAT_VERSION/bat_${BAT_VERSION:1}_armhf.deb
+      elevation apt install ./bat_${BAT_VERSION:1}_armhf.deb
+      rm bat_${BAT_VERSION:1}_armhf.deb
+      ;;
 
-  if [ $(uname -m | grep arm | wc -l) -eq 0 ]; then
-    if [ $(uname -m | grep aarch64 | wc -l) -eq 0 ]; then
-      wget https://github.com/sharkdp/bat/releases/download/$BAT_VERSION/bat-musl_${BAT_VERSION:1}_amd64.deb
-      elevation apt install ./bat-musl_${BAT_VERSION:1}_amd64.deb
-      rm bat-musl_${BAT_VERSION:1}_amd64.deb
-    else
+    aarch64)
       wget https://github.com/sharkdp/bat/releases/download/$BAT_VERSION/bat_${BAT_VERSION:1}_arm64.deb
       elevation apt install ./bat_${BAT_VERSION:1}_arm64.deb
       rm bat_${BAT_VERSION:1}_arm64.deb
-    fi
-  else
-    wget https://github.com/sharkdp/bat/releases/download/$BAT_VERSION/bat_${BAT_VERSION:1}_armhf.deb
-    elevation apt install ./bat_${BAT_VERSION:1}_armhf.deb
-    rm bat_${BAT_VERSION:1}_armhf.deb
-  fi
+      ;;
+
+    *)
+      wget https://github.com/sharkdp/bat/releases/download/$BAT_VERSION/bat-musl_${BAT_VERSION:1}_amd64.deb
+      elevation apt install ./bat-musl_${BAT_VERSION:1}_amd64.deb
+      rm bat-musl_${BAT_VERSION:1}_amd64.deb
+      ;;
+  esac
 else
   install_packages bat
 fi

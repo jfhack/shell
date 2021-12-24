@@ -17,21 +17,23 @@ elevation(){
 install_packages(){
   if command -v pacman &> /dev/null
   then
-    echo "found pacman"
     elevation pacman -Syu
     elevation pacman -S "$@" --noconfirm
   fi
 
   if command -v apt &> /dev/null
   then
-    echo "found apt"
     elevation apt update
     elevation apt install "$@" -y
   fi
 }
 
 install_packages git fish
-chsh -s fish || chsh -s $(which fish)
+if [[ $TERMUX == 1 ]]; then
+  chsh -s fish
+else
+  chsh -s $(which fish)
+fi
 mkdir -p ~/.config/fish/functions
 cp fish/config.fish ~/.config/fish/config.fish
 cp fish/fish_title.fish ~/.config/fish/functions/fish_title.fish
