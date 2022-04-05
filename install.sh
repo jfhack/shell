@@ -6,8 +6,17 @@ then
   TERMUX=1
 fi
 
+err(){
+  >&2 echo "E: $*"
+}
+
 elevation(){
   if [[ $EUID > 0 && $TERMUX == 0 ]]; then
+    if ! command -v sudo &> /dev/null
+    then
+      err "This installer requires sudo for non-root users"
+      exit 1
+    fi
     sudo "$@"
   else
     "$@"
