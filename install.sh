@@ -4,7 +4,7 @@ export UPDATE=0
 
 source util.sh
 
-install_packages git fish
+install_packages git fish curl
 if [[ "$(basename $SHELL)" == "fish" ]]; then
   echo "I: already using fish"
 else
