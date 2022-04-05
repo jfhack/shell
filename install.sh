@@ -1,47 +1,18 @@
 #!/bin/bash
 
-TERMUX=0
-if command -v termux-setup-storage &> /dev/null
-then
-  TERMUX=1
-fi
+export UPDATE=0
 
-err(){
-  >&2 echo "E: $*"
-}
-
-elevation(){
-  if [[ $EUID > 0 && $TERMUX == 0 ]]; then
-    if ! command -v sudo &> /dev/null
-    then
-      err "This installer requires sudo for non-root users"
-      exit 1
-    fi
-    sudo "$@"
-  else
-    "$@"
-  fi
-}
-
-install_packages(){
-  if command -v pacman &> /dev/null
-  then
-    elevation pacman -Syu
-    elevation pacman -S "$@" --noconfirm
-  fi
-
-  if command -v apt &> /dev/null
-  then
-    elevation apt update
-    elevation apt install "$@" -y
-  fi
-}
+source util.sh
 
 install_packages git fish
-if [[ $TERMUX == 1 ]]; then
-  chsh -s fish
+if [[ "$(basename $SHELL)" == "fish" ]]; then
+  echo "I: already using fish"
 else
-  chsh -s $(which fish)
+  if [[ $TERMUX == 1 ]]; then
+    chsh -s fish
+  else
+    chsh -s $(which fish)
+  fi
 fi
 mkdir -p ~/.config/fish/functions
 cp fish/config.fish ~/.config/fish/config.fish

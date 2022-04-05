@@ -2,52 +2,22 @@
 
 # EXA_VERSION=v0.10.1
 
-TERMUX=0
-if command -v termux-setup-storage &> /dev/null
-then
-  TERMUX=1
+source util.sh
 
-  pkg install exa
+if [[ $TERMUX == 1 ]]
+then
+  pkg install bat
   exit
 fi
 
-elevation(){
-  if [[ $EUID > 0 && $TERMUX == 0 ]]; then
-    sudo "$@"
-  else
-    "$@"
-  fi
-}
-
-install_packages(){
-  if command -v pacman &> /dev/null
-  then
-    elevation pacman -Syu
-    elevation pacman -S "$@" --noconfirm
-  fi
-
-  if command -v apt &> /dev/null
-  then
-    elevation apt update
-    elevation apt install "$@" -y
-  fi
-}
-
 install_packages curl git wget unzip
-
-# from https://gist.github.com/lukechilds/a83e1d7127b78fef38c2914c4ececc3c
-get_latest_release() {
-  curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
-    grep '"tag_name":' |                                            # Get tag line
-    sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
-}
 
 if [ -z ${EXA_VERSION+x} ]; then
   EXA_VERSION=$(get_latest_release "ogham/exa")
 fi
 
 if [ "$EXA_VERSION" == $(exa -v 2> /dev/null | sed -n 2p | awk '{print $1;}') ]; then
-  echo "exa is already the newest version ($EXA_VERSION)"
+  echo "I: exa is already the newest version ($EXA_VERSION)"
   exit
 fi
 
