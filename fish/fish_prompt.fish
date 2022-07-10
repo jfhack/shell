@@ -82,6 +82,12 @@ function prompt_virtual_env -d "Display Python virtual environment"
   end
 end
 
+function prompt_conda_env -d "Display Conda virtual environment"
+  if test "$CONDA_DEFAULT_ENV"
+    prompt_segment green black (basename $CONDA_DEFAULT_ENV)
+  end
+end
+
 
 function prompt_user -d "Display current user if different from $default_user"
   set -l BG 444444
@@ -251,6 +257,7 @@ end
 function fish_prompt
   set -g RETVAL $status
   prompt_status
+  prompt_conda_env
   prompt_virtual_env
   prompt_user
   prompt_dir
