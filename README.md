@@ -39,6 +39,11 @@ For example in debian based distros
 sudo apt install locales-all
 ```
 
+If you get the following error, probably you have an outdated version of [fish](https://github.com/fish-shell/fish-shell), for example 3.1.0, you could fix this in Ubuntu based systems with this [PPA](https://launchpad.net/~fish-shell/+archive/ubuntu/release-3)
+```
+fish: Unknown command: __fish_is_first_arg
+```
+
 # Gnome Terminal
 
 The colors shown in the screenshots were obtained from [alacritty](https://github.com/alacritty/alacritty) and were exported to Gnome Terminal with the command
