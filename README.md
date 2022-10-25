@@ -6,6 +6,10 @@ I consider it fast enough to use it in the small Raspberry Pi Zero
 Tested on many debian based distros and manjaro
 
 # Installation
+It is NOT recommended to run the script with `sudo`, as this can lead to permission issues
+
+Run the following script:
+
 ```sh
 ./install.sh
 ```
@@ -17,6 +21,11 @@ This will also install [exa](https://github.com/ogham/exa) and [bat](https://git
 ```sh
 ./install_only_exa.sh
 ./install_only_bat.sh
+```
+
+In case you don't want to make [fish](https://github.com/fish-shell/fish-shell) your default shell, i.e. invoke it only by typing `fish`, then you should install it as follows
+```sh
+ALREADY_USING_FISH=1 ./install.sh
 ```
 
 # Screenshots
@@ -31,6 +40,10 @@ This will also install [exa](https://github.com/ogham/exa) and [bat](https://git
 The font I use is `MesloLGS NF` included in the fonts directory
 
 # Troubleshooting
+
+In some cases it is necessary to log out and back in to see [fish](https://github.com/fish-shell/fish-shell) as the default shell
+
+In cases of display problems of the characters that close the sections, that is, they do not look similar to the photos, check if a compatible font is installed and being used, such as `MesloLGS NF`
 
 In some cases the appearance of the symbols may not be correct, for example a question mark may appear at the end of the prompt, this can be solved by installing the `locales-all` package
 
@@ -50,10 +63,11 @@ The colors shown in the screenshots were obtained from [alacritty](https://githu
 ```sh
 dconf dump /org/gnome/terminal/legacy/profiles:/ > gnome-terminal-profiles.dconf
 ```
-so they can be imported as follows
+so they can be imported by you as follows
 ```sh
-dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal-profiles.dconf
+dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal/gnome-terminal-profiles.dconf
 ```
+**Important note, this command will replace your profiles! so backup them first**
 
 and this should look like this
 
