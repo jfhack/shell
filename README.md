@@ -72,3 +72,26 @@ dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal/gnome-terminal
 and this should look like this
 
 ![Gnome Terminal profiles](images/5.png "Gnome Terminal profiles")
+
+# Optional
+
+## pyenv
+To install [pyenv](https://github.com/pyenv/pyenv), the [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) plugin, and configure them, execute the following commands:
+
+```sh
+cd optional
+./install_pyenv.sh
+```
+This process will prompt you to provide the installation path. This will be the path of the [pyenv](https://github.com/pyenv/pyenv) repository, and in the `versions` subdirectory is where the virtual environments will be stored
+
+### Quick reference
+
+|Command|Description|
+|-|-|
+|`pyenv install --list`|list all available versions|
+|`pyenv install 3.10.6`|install a specific version from the available versions, e.g., `3.10.6`|
+|`pyenv virtualenv 3.10.6 my_venv`|create a virtual environment named `my_venv` based on `3.10.6`|
+|`pyenv activate my_venv`|activate the `my_venv` virtual environment|
+|`pyenv deactivate`|deactivate the current virtual environment|
+|`pyenv versions`|list all virtual environments|
+|`pyenv uninstall my_venv`|delete the `my_venv` virtual environment|
