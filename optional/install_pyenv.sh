@@ -97,3 +97,5 @@ Quick reference:
 Your virtualenvs are located at ${PYENV_ROOT}/versions
 
 EOF
+
+fish -c "set -Ux PYENV_VIRTUALENV_DISABLE_PROMPT 0"
