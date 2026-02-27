@@ -6,7 +6,7 @@ source util.sh
 
 if [[ $TERMUX == 1 ]]
 then
-  pkg install exa
+  pkg install eza # fallback to eza in termux since exa is not available
   exit
 fi
 
