@@ -18,6 +18,6 @@ set -g fish_color_param cccccc
 set -g fish_color_escape ffffff --bold
 set -g fish_color_operator ffffff --bold
 
-alias ll "exa -l -g --icons"
+alias ll "eza -l -g --icons"
 alias lla "ll -a"
 alias bb "bat -P -p"

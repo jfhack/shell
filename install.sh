@@ -25,5 +25,5 @@ cp fish/fish_title.fish ~/.config/fish/functions/fish_title.fish
 cp fish/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
 fish fish/configure.fish
 
-bash install_only_exa.sh
+bash install_only_eza.sh
 bash install_only_bat.sh
