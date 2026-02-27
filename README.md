@@ -15,9 +15,9 @@ Run the following script:
 ```
 This will install [fish](https://github.com/fish-shell/fish-shell) with the modified [shellder](https://github.com/simnalamburt/shellder) theme, the plugin manager [fisher](https://github.com/jorgebucaran/fisher) and the [z](https://github.com/jethrokuan/z) plugin (this is located in [fish/configure.fish](fish/configure.fish))
 
-This will also install [exa](https://github.com/ogham/exa) and [bat](https://github.com/sharkdp/bat)
+This will also install [eza](https://github.com/eza-community/eza) and [bat](https://github.com/sharkdp/bat)
 
-[exa](https://github.com/ogham/exa) and [bat](https://github.com/sharkdp/bat) are provided as individual installable scripts
+[eza](https://github.com/eza-community/eza) and [bat](https://github.com/sharkdp/bat) are provided as individual installable scripts
 ```sh
 ./install_only_exa.sh
 ./install_only_bat.sh
