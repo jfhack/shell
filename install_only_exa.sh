@@ -6,7 +6,7 @@ source util.sh
 
 if [[ $TERMUX == 1 ]]
 then
-  pkg install bat
+  pkg install exa
   exit
 fi
 
