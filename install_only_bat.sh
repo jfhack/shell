@@ -39,9 +39,9 @@ then
       ;;
 
     *)
-      wget https://github.com/sharkdp/bat/releases/download/$BAT_VERSION/bat-musl_${BAT_VERSION:1}_amd64.deb
-      elevation apt install ./bat-musl_${BAT_VERSION:1}_amd64.deb
-      rm bat-musl_${BAT_VERSION:1}_amd64.deb
+      wget https://github.com/sharkdp/bat/releases/download/$BAT_VERSION/bat-musl_${BAT_VERSION:1}_musl-linux-amd64.deb
+      elevation apt install ./bat-musl_${BAT_VERSION:1}_musl-linux-amd64.deb
+      rm bat-musl_${BAT_VERSION:1}_musl-linux-amd64.deb
       ;;
   esac
 else
