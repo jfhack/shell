@@ -39,6 +39,8 @@ ALREADY_USING_FISH=1 ./install.sh
 
 The font I use is `MesloLGS NF` included in the fonts directory
 
+To display icons correctly, [eza](https://github.com/eza-community/eza) requires the `0xProto Nerd Font` located in the `fonts/eza` directory
+
 # Troubleshooting
 
 In some cases it is necessary to log out and back in to see [fish](https://github.com/fish-shell/fish-shell) as the default shell
