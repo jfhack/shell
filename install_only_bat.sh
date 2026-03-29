@@ -44,6 +44,19 @@ then
       rm bat_${BAT_VERSION:1}_amd64.deb
       ;;
   esac
+elif command -v dnf &> /dev/null
+then
+  case $(uname -m) in
+    aarch64)
+      wget https://github.com/sharkdp/bat/releases/download/$BAT_VERSION/bat-${BAT_VERSION}-aarch64-unknown-linux-gnu.tar.gz -O /tmp/bat.tar.gz
+      ;;
+    *)
+      wget https://github.com/sharkdp/bat/releases/download/$BAT_VERSION/bat-${BAT_VERSION}-x86_64-unknown-linux-musl.tar.gz -O /tmp/bat.tar.gz
+      ;;
+  esac
+  tar -xzf /tmp/bat.tar.gz -C /tmp
+  elevation install /tmp/bat-${BAT_VERSION}*/bat /usr/local/bin/bat
+  rm -rf /tmp/bat.tar.gz /tmp/bat-${BAT_VERSION}*
 else
   install_packages bat
 fi

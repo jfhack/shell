@@ -25,9 +25,14 @@ install_packages(){
       export UPDATE=1
     fi
     elevation pacman -S "$@" --noconfirm
-  fi
-
-  if command -v apt &> /dev/null
+  elif command -v dnf &> /dev/null
+  then
+    if [[ $UPDATE != 1 ]]; then
+      elevation dnf check-update || true
+      export UPDATE=1
+    fi
+    elevation dnf install "$@" -y
+  elif command -v apt &> /dev/null
   then
     if [[ $UPDATE != 1 ]]; then
       elevation apt update

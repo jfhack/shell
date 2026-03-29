@@ -9,6 +9,9 @@ source ../util.sh
 if command -v apt &> /dev/null
 then
   install_packages --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+elif command -v dnf &> /dev/null
+then
+  install_packages make gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel wget curl llvm
 else
   install_packages base-devel
 fi

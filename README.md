@@ -3,7 +3,7 @@ This is the shell that I use daily and that I have configured with [fish](https:
 
 I consider it fast enough to use it in the small Raspberry Pi Zero
 
-Tested on many debian based distros and manjaro
+Tested on many debian based distros, manjaro, and fedora
 
 # Installation
 It is NOT recommended to run the script with `sudo`, as this can lead to permission issues
@@ -52,6 +52,11 @@ In some cases the appearance of the symbols may not be correct, for example a qu
 For example in debian based distros
 ```sh
 sudo apt install locales-all
+```
+
+In Fedora
+```sh
+sudo dnf install glibc-all-langpacks
 ```
 
 If you get the following error, probably you have an outdated version of [fish](https://github.com/fish-shell/fish-shell), for example 3.1.0, you could fix this in Ubuntu based systems with this [PPA](https://launchpad.net/~fish-shell/+archive/ubuntu/release-3)
